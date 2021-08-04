@@ -2,10 +2,7 @@
 const teddiesElement = document.getElementById('teddies');
 
 function renderTeddies() {
-    teddiesElement.innerHTML = `<div>
-    <h1> Coucou </h1>
-    </div>
-    `
+    teddiesElement.innerHTML = "coucou";
 }
 
 renderTeddies(); 
