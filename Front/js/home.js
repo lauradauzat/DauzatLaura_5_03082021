@@ -1,4 +1,14 @@
+class Article {
+  constructor(jsonArticle) {
+      jsonArticle && Object.assign(this, jsonArticle); 
+  }
+}
 
+class ArticleManager {
+  constructor(listArticle) {
+      this.listArticle = listArticle; 
+  }
+}
 
 fetch("http://localhost:3000/api/teddies/")
     .then( data => data.json())
@@ -7,7 +17,8 @@ fetch("http://localhost:3000/api/teddies/")
         for(let jsonArticle of jsonListArticle) {
             let teddieCount = 0; 
             let article = new Article(jsonArticle);
-            let colorCount = 0; 
+            console.log(article); 
+           
 
          
             document.querySelector('#teddies-card-container').innerHTML += `  
@@ -18,28 +29,18 @@ fetch("http://localhost:3000/api/teddies/")
               <p class="card-text">
                 ${article.description}
               </p>
-              <div class="input-group mb-3">
-                <select class="custom-select selector" id="inputGroupSelect02">
-                  <option selected>Couleur...</option>
               
-                </select>
-                
               </div>
               <p class="card-text">
               Prix : ${article.price}€            
               </p>
-              <a href="#!" class="btn btn-primary">Ajouter au panier</a>
+              <a href="/Front/html/produit.html?id=${article._id}" class="btn btn-primary">Détails</a>
             </div>
           </div>
           `;
 
-          for (let color of article.colors) {
-            console.log(color); 
-            document.querySelector('.selector').innerHTML +=  `<option value="${colorCount}">${color}</option>`;
-            colorCount ++; 
-            console.log(colorCount);
-            
-        }      
+         
+       
         }
 
 
@@ -47,3 +48,6 @@ fetch("http://localhost:3000/api/teddies/")
         
        
     });
+
+
+  
