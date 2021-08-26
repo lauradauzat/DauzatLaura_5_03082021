@@ -31,23 +31,8 @@ fetch(fetchId)
       // Examine the text in the response
       response.json().then(function(data) {
         ours = data; 
-       
-        console.log(ours.colors); 
-        
-        document.getElementById('oursName').innerHTML = ours.name;
-        document.getElementById('oursDescription').innerHTML = ours.description;
-        document.getElementById('oursPrice').innerHTML += ours.price; 
-        document.getElementById('oursImg').src = ours.imageUrl; 
-
-
-        colorCount = 0; 
-
-         for (let color of ours.colors) {
-
-            document.querySelector('.selector').innerHTML +=  `<option value="${colorCount}">${color}</option>`;
-           colorCount ++; 
-         
-           }     
+        printProduit();
+          
 
       });
     }
@@ -58,3 +43,38 @@ fetch(fetchId)
 
   
 
+function printOursName() {
+    document.getElementById('oursName').innerHTML = ours.name;
+}
+
+function printOursDescription() {
+    document.getElementById('oursDescription').innerHTML = ours.description;
+}
+
+
+function printOursPrice() {
+    document.getElementById('oursPrice').innerHTML += ours.price; 
+}
+
+function printOursImg() {
+    document.getElementById('oursImg').src = ours.imageUrl; 
+}
+
+function printOursSelect() {
+    colorCount = 0; 
+
+         for (let color of ours.colors) {
+
+            document.querySelector('.selector').innerHTML +=  `<option value="${colorCount}">${color}</option>`;
+           colorCount ++; 
+         
+           }  
+}
+
+function printProduit() {
+    printOursName();
+    printOursPrice(); 
+    printOursDescription(); 
+    printOursImg(); 
+    printOursSelect();
+}
