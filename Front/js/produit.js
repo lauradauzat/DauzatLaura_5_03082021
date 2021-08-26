@@ -31,6 +31,8 @@ fetch(fetchId)
       // Examine the text in the response
       response.json().then(function(data) {
         ours = data; 
+
+        //rassemble tout le code pour creer la div
         printProduit();
           
 
@@ -41,7 +43,7 @@ fetch(fetchId)
     console.log('Fetch Error :-S', err);
   });
 
-  
+//impression des differents éléments de la div produit
 
 function printOursName() {
     document.getElementById('oursName').innerHTML = ours.name;
@@ -65,12 +67,14 @@ function printOursSelect() {
 
          for (let color of ours.colors) {
 
-            document.querySelector('.selector').innerHTML +=  `<option value="${colorCount}">${color}</option>`;
+            document.querySelector('.selector').innerHTML +=  `<option value="${color}">${color}</option>`;
            colorCount ++; 
+           
          
            }  
 }
 
+//rassemble tous les élements de la div 
 function printProduit() {
     printOursName();
     printOursPrice(); 
@@ -78,3 +82,25 @@ function printProduit() {
     printOursImg(); 
     printOursSelect();
 }
+
+//creation de l'event listenner sur le button ajout panier
+
+const btn = document.getElementById('ajoutPanier'); 
+
+btn.addEventListener("click", function () {
+  console.log('Ajout panier clicked'); 
+  const teddieColors = document.getElementsByTagName('select'); 
+  const teddieColorSelected = teddieColors[0].value;
+
+  if (teddieColorSelected != "Couleur...") {
+   
+    localStorage.setItem(ours.name, teddieColorSelected); 
+    console.log(localStorage);
+    
+    
+  } else {
+    console.log("Merci de choisir une couleur"); 
+  }
+  
+}); 
+

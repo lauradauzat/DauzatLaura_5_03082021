@@ -20,40 +20,82 @@
 
           <div class="navbar-brand d-flex">
             
-            <a> <img src="../img/logo.png">  Oniroco </a>            
+            <a href="/Front/index.html"> <img src="../img/logo.png">  Oniroco </a>            
           </div>
 
           <div>
-            <a class="py-2 d-none d-md-inline-block" href="../index.html">Accueil</a>
+            <a class="py-2 d-none d-md-inline-block" href="/Front/index.html">Accueil</a>
             <a class="py-2 d-none d-md-inline-block" href="panier.html">Panier</a>      
           </div>
         </nav>
        
     </header>
 
-    <main class="container-fluid">
+    <main class="container-fluid vh-100 d-flex flex-column justify-content-center">
 
-      <div>
+     <div class="row">
+
+      <div class="col-12 col-md-8">
+
+      
           <h1>Détail de votre panier</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Produit</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+               
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+ 
+              </tr>
+            </tbody>
+          </table>
           <div>
-            <p>élement 1</p>
-            <p>Prix: 34€</p>
+              <h2>Total : 5556€</h2>
 
+            
           </div>
 
-          <div>
-              <h2>Total : 34€</h2>
-          </div>
+          
+      
 
-          <button>Confirmer la commande</button>
       </div>
+
+      <div class="col-md-4 d-flex align-items-center justify-content-center">
+
+        <button class="btn-secondary btn-lg">Confirmer la commande</button>
+      </div>
+
+
+
+     </div>
+
+     
 
 
 
     </main>
 
     <!-- Footer -->
-    <footer class="bg-light py-4 bottom">
+    <footer class="bg-light py-4 fixed-bottom ">
         <ul class="list-inline text-center">
             <li class="list-inline-item"><a href="index.html" title="Accueil">Accueil</a></li>
             <li class="list-inline-item"><a href="mailto:orincobears@gmail.com?subject=Contact" title="Contact">Contact</a>
