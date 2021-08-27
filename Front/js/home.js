@@ -53,7 +53,7 @@ function createDiv(article) {
       
       </div>
       <p class="card-text">
-      Prix : ${article.price}€            
+      Prix : ${article.price/100}€            
       </p>
       <a href="/Front/html/produit.html?id=${article._id}" class="btn btn-primary">Détails</a>
     </div>

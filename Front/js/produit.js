@@ -17,7 +17,7 @@ function getFetch() {
 const fetchId = getFetch();
 
 
-let ours
+let ours;
 
 fetch(fetchId)
 .then(
@@ -55,7 +55,7 @@ function printOursDescription() {
 
 
 function printOursPrice() {
-    document.getElementById('oursPrice').innerHTML += ours.price; 
+    document.getElementById('oursPrice').innerHTML += `${ours.price/100} €`; 
 }
 
 function printOursImg() {
@@ -86,6 +86,7 @@ function printProduit() {
 //creation de l'event listenner sur le button ajout panier
 
 const btn = document.getElementById('ajoutPanier'); 
+let quantite = 0;
 
 btn.addEventListener("click", function () {
   console.log('Ajout panier clicked'); 
@@ -93,14 +94,54 @@ btn.addEventListener("click", function () {
   const teddieColorSelected = teddieColors[0].value;
 
   if (teddieColorSelected != "Couleur...") {
-   
-    localStorage.setItem(ours.name, teddieColorSelected); 
-    console.log(localStorage);
+    quantite ++;
+    // V1
+    //localStorage.setItem(ours.name, teddieColorSelected); 
+    // const teddieObject = {'name': ours.name, 'color': teddieColorSelected, 'price': ours.price}; 
+    // localStorage.setItem('teddieObject', JSON.stringify(teddieObject)); 
+    // console.log(localStorage);
     
+
+      // 1. Récupérer la quantité de larticle à ajouter au panier
+    
+
+    // 2. Créer un objet JSON de l'article à ajouter au panier
+    let article = {
+      "id": id,
+      "quantite": quantite
+    }
+
+   
+    
+    console.log(article); 
+
+    // 3. Récupérer le panier stocké dans localStorage
+    let panierStr = localStorage.getItem("panier");
+    console.log('etape 3 :'+ panierStr);
+    
+
+    if (panierStr == null) {
+      let panierObj = [article];
+      panierStr = JSON.stringify(panierObj);
+      localStorage.setItem("panier", panierStr);
+    }
+    else {
+      let panierObj = JSON.parse(panierStr);
+      panierObj.push(article);
+      panierStr = JSON.stringify(panierObj);
+      localStorage.setItem("panier", panierStr);
+    }
+
+
+
+
+
     
   } else {
     console.log("Merci de choisir une couleur"); 
   }
+
+
   
 }); 
 
