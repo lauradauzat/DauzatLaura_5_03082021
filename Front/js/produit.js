@@ -1,4 +1,4 @@
-
+let clickCount = 0; 
 
 function getId() {
     const param = window.location.search; 
@@ -88,36 +88,46 @@ function printProduit() {
 const btn = document.getElementById('ajoutPanier'); 
 let quantite = 0;
 
-btn.addEventListener("click", function () {
+btn.addEventListener("click", function (e) {
   console.log('Ajout panier clicked'); 
   const teddieColors = document.getElementsByTagName('select'); 
   const teddieColorSelected = teddieColors[0].value;
 
   if (teddieColorSelected != "Couleur...") {
-    quantite ++;
-    // V1
-    //localStorage.setItem(ours.name, teddieColorSelected); 
-    // const teddieObject = {'name': ours.name, 'color': teddieColorSelected, 'price': ours.price}; 
-    // localStorage.setItem('teddieObject', JSON.stringify(teddieObject)); 
-    // console.log(localStorage);
     
+    // 1. Récupérer la quantité de larticle à ajouter au panier
+    
+    quantite ++;
+    clickCount ++; 
+    console.log(clickCount);
 
-      // 1. Récupérer la quantité de larticle à ajouter au panier
+    
+    if (clickCount = 1) {
+
+      console.log('normal'); 
+
+    } else {
+
+      
+    }
+    
     
 
     // 2. Créer un objet JSON de l'article à ajouter au panier
     let article = {
       "id": id,
       "quantite": quantite
+
+
     }
 
-   
-    
     console.log(article); 
 
     // 3. Récupérer le panier stocké dans localStorage
     let panierStr = localStorage.getItem("panier");
     console.log('etape 3 :'+ panierStr);
+    
+   
     
 
     if (panierStr == null) {
@@ -130,6 +140,8 @@ btn.addEventListener("click", function () {
       panierObj.push(article);
       panierStr = JSON.stringify(panierObj);
       localStorage.setItem("panier", panierStr);
+
+      
     }
 
 
@@ -139,6 +151,8 @@ btn.addEventListener("click", function () {
     
   } else {
     console.log("Merci de choisir une couleur"); 
+    alert('Merci de choisir une couleur');
+    e.preventDefault();
   }
 
 
