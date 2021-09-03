@@ -12,6 +12,8 @@ let total = 0;
 let panierStr = localStorage.getItem("panier");
 let panierObj = JSON.parse(panierStr);
 
+//Calculer 
+
 
 if (panierObj == null) {
 
@@ -39,7 +41,7 @@ panierObj.forEach(article => {
         }
 
        
-        response.json().then(function(data, quantite) {
+        response.json().then(function(data) {
             display = data;
             price = (display.price / 100); 
             
@@ -47,10 +49,13 @@ panierObj.forEach(article => {
             //affiche le résultat 
             //voir pour le mettre plutôt dans une fonction 
 
+            //si j'ai envie de compter les quantité correctement, c'est ici que ca se passe ! 
+            // creer un nouveau tableau a partir des données data 
+
             table.innerHTML += `
                 <tr>
                 <th scope="row"> ${display.name}</th>
-                <td>${article.quantite}</td>
+                <td> 1 </td>
                 <td>${price}</td>
                 
                 </tr>
@@ -100,7 +105,7 @@ panierObj.forEach(article => {
 
 
 
-function fetchArticle(id, quantite) {
+function fetchArticle(id) {
     url_article = 'http://localhost:3000/api/teddies/' + id; 
     console.log(url_article); 
     fetch(url_article, {

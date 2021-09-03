@@ -1,12 +1,132 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+<!doctype html>
+<html lang="fr">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Votre ours en peluche préféré vous attend chez Orinoco">
+  
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <title>Orinoco, Ours en peluche</title>
+  </head>
+  <body class="container-fluid" id="formulaire">
+
+    <header class="sticky-top">
+      
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container d-flex flex-column flex-md-row justify-content-between">
+
+          <div class="navbar-brand d-flex">
+            
+            <a href="/Front/index.html"> <img src="../img/logo.png">  Oniroco </a>            
+          </div>
+
+          <div>
+            <a class="py-2 d-none d-md-inline-block" href="/Front/index.html">Accueil</a>
+            <a class="py-2 d-none d-md-inline-block" href="panier.html">Panier</a>      
+          </div>
+        </nav>
+       
+    </header>
+
+    <main class="container-fluid vh-100 d-flex flex-column justify-content-center">
+
+     <div id="global" class="row">
+
+      <div  class="col-12 col-md-8">
+
+      
+          <h1>Formulaire </h1>
+
+          <form id="contact-form" action="/Front/html/confirmation.html" >
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="inputNom" placeholder="Nom" required>
+                <input type="text" class="form-control" id="inputPrenom" placeholder="Prénom">
+            </div>
+
+            <div class="form-group">
+              <input type="email" class="form-control" id="inputEmail" placeholder="Email" required>
+            </div>
+           
+            <div class="form-group">
+                <input type="text" class="form-control" id="inputAdresse" placeholder="Adresse" required >
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="inputVille" placeholder="Ville" required>
+            </div>
+
+
+
+         
+            <input type="submit" class="btn-secondary btn-lg" value="Confirmer la commande">
+          </form>
+         
+      
+
+
+          
+      
+
+      </div>
+
+      <div class="col-md-4 d-flex flex-column align-items-center justify-content-center" id="right-side">
+
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Produit</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix</th>
+              </tr>
+            </thead>
+            <tbody id="teddieTable">
+              
+            </tbody>
+          </table>
+          <div>
+              <h2 id="total">Total : </h2>
+
+            
+          </div>
+
+
+        
+      </div>
+
+
+
+     </div>
+
+     
+
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light py-4 fixed-bottom ">
+        <ul class="list-inline text-center">
+            <li class="list-inline-item"><a href="index.html" title="Accueil">Accueil</a></li>
+            <li class="list-inline-item"><a href="mailto:orincobears@gmail.com?subject=Contact" title="Contact">Contact</a>
+            </li>
+            <li class="list-inline-item"><a href="#" title="Mentions Légales">Mentions Légales</a></li>
+        </ul>
+        <p class="copyright text-center">Orinoco © 2021</p>
+    </footer>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <script src="/Front/js/panier.js"></script>
+    <script src='/Front/js/formulaire.js'></script>
+
+  </body>
 </html>

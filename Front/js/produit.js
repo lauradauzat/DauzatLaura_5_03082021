@@ -1,4 +1,4 @@
-let clickCount = 0; 
+// let clickCount = 0; 
 
 function getId() {
     const param = window.location.search; 
@@ -86,7 +86,7 @@ function printProduit() {
 //creation de l'event listenner sur le button ajout panier
 
 const btn = document.getElementById('ajoutPanier'); 
-let quantite = 0;
+// let quantite = 1;
 
 btn.addEventListener("click", function (e) {
   console.log('Ajout panier clicked'); 
@@ -97,28 +97,15 @@ btn.addEventListener("click", function (e) {
     
     // 1. Récupérer la quantité de larticle à ajouter au panier
     
-    quantite ++;
-    clickCount ++; 
-    console.log(clickCount);
+    // quantite ++;
+    // clickCount ++; 
+    // console.log(clickCount);
 
-    
-    if (clickCount = 1) {
-
-      console.log('normal'); 
-
-    } else {
-
-      
-    }
-    
-    
 
     // 2. Créer un objet JSON de l'article à ajouter au panier
     let article = {
-      "id": id,
-      "quantite": quantite
-
-
+      "id": id
+      // "quantite": quantite
     }
 
     console.log(article); 
