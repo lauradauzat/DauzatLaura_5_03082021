@@ -1,4 +1,4 @@
-
+var i = 0;
 const table = document.getElementById('teddieTable'); 
 const totalHtml = document.getElementById('total'); 
 const globalHtml = document.getElementById('global');
@@ -30,6 +30,10 @@ function panierHandler() {
     }
   }
 
+function test() {
+    //code pour supp un item de localStorage 
+}
+
 // 1. Récupérer les articles dans le localStorage
 let panierStr = localStorage.getItem("panier");
 let panierObj = JSON.parse(panierStr);
@@ -50,8 +54,11 @@ if (panierObj == null) {
 // 2. Récuperer les informations sur l'article
 panierObj.forEach(article => {
     fetchArticle(article.id, article.quantite);
-  
     
+    console.log(i);
+ 
+  
+
 
     fetch("http://localhost:3000/api/teddies/"+article.id)
     .then(
@@ -66,6 +73,7 @@ panierObj.forEach(article => {
         response.json().then(function(data) {
             display = data;
             price = (display.price / 100); 
+      
             
        
             //affiche le résultat 
@@ -79,7 +87,9 @@ panierObj.forEach(article => {
                 <th scope="row"> ${display.name}</th>
                 <td> 1 </td>
                 <td>${price}</td>
-                
+                <td>
+                <button onclick="test();"> x </button>
+                </td>
                 </tr>
             `;
         
@@ -97,6 +107,7 @@ panierObj.forEach(article => {
         console.log('Fetch Error :-S', err);
     });
 
+    i++;
     
 });
 
