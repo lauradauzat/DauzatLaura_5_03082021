@@ -1,14 +1,21 @@
 
 
-nav img {
-    height: 30px;
+nav {
+
+    img {
+        height: 30px;
+    }
+   
+    a {
+        text-decoration: none;
+    }
+
+    #panierFull {
+        color: $secondary;
+    }
 }
 
-nav a {
-    text-decoration: none;
-}
 
-.card img {
-    
-}
+ 
+
 

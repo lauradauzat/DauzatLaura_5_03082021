@@ -14,7 +14,32 @@ function getFetch() {
    
 }
 
+function panierHandler() {
+  const panierMenu = document.getElementById('panier-menu'); 
+  if (localStorage.getItem('panier') === null) {
+ 
+    console.log('panier = null');
+    panierMenu.innerHTML += ` <span id="panierFull text text-danger" > <i class="bi bi-app"></i>
+    </span> `;
+    
+
+  } else if  (localStorage.getItem('panier')) {
+ 
+    console.log("panier is set");
+    
+    let panierStr = localStorage.getItem("panier");
+    let panierObj = JSON.parse(panierStr);
+    let countPanier = 0; 
+    panierObj.forEach(article => {
+    countPanier ++;
+    });
+    panierMenu.innerHTML += ` <span id="panierFull" > ${countPanier} <i class="bi bi-circle-square"></i> </span> `;
+    
+  }
+}
+
 const fetchId = getFetch();
+const panierFullHtml = document.getElementById('panierFull');
 
 
 let ours;
@@ -121,12 +146,19 @@ btn.addEventListener("click", function (e) {
       let panierObj = [article];
       panierStr = JSON.stringify(panierObj);
       localStorage.setItem("panier", panierStr);
+      panierHandler();
+      
+     
+      
     }
     else {
       let panierObj = JSON.parse(panierStr);
       panierObj.push(article);
       panierStr = JSON.stringify(panierObj);
       localStorage.setItem("panier", panierStr);
+      // const panierFullHtml = document.getElementById('panierFull');
+      // panierFullHtml.remove(); 
+      panierHandler();
 
       
     }

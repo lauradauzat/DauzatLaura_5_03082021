@@ -6,7 +6,29 @@ let display;
 var price; 
 let total = 0; 
 
-
+function panierHandler() {
+    const panierMenu = document.getElementById('panier-menu'); 
+    const panierFull = document.getElementById('panierFull');
+    if (localStorage.getItem('panier') === null) {
+   
+      console.log('panier = null');
+  
+    } else if  (localStorage.getItem('panier')) {
+   
+      
+      console.log("panier is set");
+      
+      let panierStr = localStorage.getItem("panier");
+      let panierObj = JSON.parse(panierStr);
+      let countPanier = 0; 
+      panierObj.forEach(article => {
+      countPanier ++;
+      });
+      panierMenu.innerHTML = '';
+      panierMenu.innerHTML += ` Panier <span id="panierFull" > ${countPanier} <i class="bi bi-circle-square"></i> </span> `;
+      
+    }
+  }
 
 // 1. Récupérer les articles dans le localStorage
 let panierStr = localStorage.getItem("panier");
@@ -76,7 +98,7 @@ panierObj.forEach(article => {
     });
 
     
-    });
+});
 
    
    
