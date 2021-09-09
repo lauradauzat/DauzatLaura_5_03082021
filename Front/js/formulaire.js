@@ -79,6 +79,8 @@ function handleFormSubmit(event) {
         // en attendant j'ai preventDafault l'ouverture de la page confirmation 
         //idee : faire passer les params dans l'url ? 
 
+        window.location.href = "/Front/html/confirmation.html?id="+orderIdCommande+"&name="+nomPourCommande;
+
     })
     
     .catch((error) => {
