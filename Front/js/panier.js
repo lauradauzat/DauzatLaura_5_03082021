@@ -1,17 +1,20 @@
-var i = 0;
+
 const table = document.getElementById('teddieTable'); 
 const totalHtml = document.getElementById('total'); 
 const globalHtml = document.getElementById('global');
+const panierMenu = document.getElementById('panier-menu'); 
 let display; 
 var price; 
 let total = 0; 
 
+//function qui gère le visuel de l'icone panier du menu 
 function panierHandler() {
-    const panierMenu = document.getElementById('panier-menu'); 
-    const panierFull = document.getElementById('panierFull');
+    
+ 
     if (localStorage.getItem('panier') === null) {
    
       console.log('panier = null');
+      panierMenu.innerHTML = `Panier <span id="panierFull text text-danger" > <i class="bi bi-app"></i>`;
   
     } else if  (localStorage.getItem('panier')) {
    
@@ -24,41 +27,69 @@ function panierHandler() {
       panierObj.forEach(article => {
       countPanier ++;
       });
-      panierMenu.innerHTML = '';
-      panierMenu.innerHTML += ` Panier <span id="panierFull" > ${countPanier} <i class="bi bi-circle-square"></i> </span> `;
+      
+      panierMenu.innerHTML = ` Panier <span id="panierFull" > ${countPanier} <i class="bi bi-circle-square"></i> </span> `;
       
     }
   }
 
-function test() {
-    //code pour supp un item de localStorage 
+
+  //function pour supprimer un article du panier via la croix 
+function deleteArticle(indexDelete) {
+
+    console.log('index Delete :', indexDelete);
+    console.log('panierObj : ', panierObj);
+    //deleting on object -> this works !!! 
+    panierObj.splice(indexDelete,1);
+    console.log('panier apres Splice :', panierObj);
+
+    //sending back modifying the array and sending it back
+    panierStr = JSON.stringify(panierObj);
+    localStorage.setItem("panier", panierStr);
+  
+    location.reload();
+    
+
+}
+
+ 
+function basketIsEmpty() {
+    while (globalHtml.hasChildNodes()) {
+        globalHtml.removeChild(globalHtml.firstChild);
+    }
+    
+    globalHtml.innerHTML = '<div  class="col-12 d-flex align-items-center "><h1> Votre panier est vide </h1></div>';
+}    
+
+
+function deleteAll() {
+    localStorage.clear();
+    basketIsEmpty();
+    panierMenu.innerHTML = `Panier <span id="panierFull text text-danger" > <i class="bi bi-app"></i>`;
+  
+
 }
 
 // 1. Récupérer les articles dans le localStorage
 let panierStr = localStorage.getItem("panier");
 let panierObj = JSON.parse(panierStr);
 
-//Calculer 
+
+function loadContent() {
+
+    // si le panier est vide - afficher un teste "votre panier est vide"
 
 
-if (panierObj == null) {
 
-    while (globalHtml.hasChildNodes()) {
-        globalHtml.removeChild(globalHtml.firstChild);
-    }
+if (panierObj == null || panierObj.lenght == 0) {
+
+    basketIsEmpty();
     
-    globalHtml.innerHTML = '<div  class="col-12 d-flex align-items-center "><h1> Votre panier est vide </h1></div>';
-    
-    
-}
-// 2. Récuperer les informations sur l'article
-panierObj.forEach(article => {
+} else {
+
+    // 2. Récuperer les informations sur l'article
+panierObj.forEach((article, index) => {
     fetchArticle(article.id, article.quantite);
-    
-    console.log(i);
- 
-  
-
 
     fetch("http://localhost:3000/api/teddies/"+article.id)
     .then(
@@ -88,12 +119,13 @@ panierObj.forEach(article => {
                 <td> 1 </td>
                 <td>${price}</td>
                 <td>
-                <button onclick="test();"> x </button>
+                <button class="btn btn-outline-success" onclick="deleteArticle(${index});"> x </button>
                 </td>
                 </tr>
             `;
         
             total += price; 
+            
             
             totalHtml.innerHTML = `Total : ${total} €`
             
@@ -107,34 +139,17 @@ panierObj.forEach(article => {
         console.log('Fetch Error :-S', err);
     });
 
-    i++;
+ 
     
 });
 
-   
-   
-// 3. Afficher l'article sur la page
-// function displayArticle(article, quantite) {
-
-//         table.innerHTML += `
-//         <tr>
-//         <th scope="row"> ${display.name}</th>
-//         <td>${quantite}</td>
-//         <td>${price}</td>
-        
-//         </tr>
-//     `;
+}
 
 
-// }
 
+}
 
-// displayTotal();
-
-// function displayTotal() {
-//     totalHtml.innerHTML += `
-//         ${total} €`;
-// }
+loadContent();
 
 
 

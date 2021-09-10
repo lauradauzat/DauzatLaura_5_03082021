@@ -45,14 +45,16 @@
                 <th scope="col">Produit</th>
                 <th scope="col">Quantité</th>
                 <th scope="col">Prix</th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody id="teddieTable">
               
             </tbody>
           </table>
-          <div>
+          <div class="d-flex justify-content-between">
               <h2 id="total">Total : </h2>
+              <button class="btn btn-outline-success" onclick="deleteAll();">Vider le panier </button>
 
             
           </div>
@@ -67,7 +69,7 @@
 
       <div class="col-md-4 d-flex align-items-center justify-content-center">
 
-        <button onclick="window.location.href='formulaire.html'" class="btn-secondary btn-lg">Confirmer la commande</button>
+        <button class="btn btn-secondary" onclick="window.location.href='formulaire.html'" class="btn-secondary btn-lg">Confirmer la commande</button>
       </div>
 
 

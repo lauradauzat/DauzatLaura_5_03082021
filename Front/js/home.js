@@ -52,10 +52,10 @@ function createDiv(article) {
       </p>
       
       </div>
-      <p class="card-text">
+      <p class="card-text px-3">
       Prix : ${article.price/100}€            
       </p>
-      <a href="/Front/html/produit.html?id=${article._id}" class="btn btn-primary">Détails</a>
+      <a href="/Front/html/produit.html?id=${article._id}" class="btn btn-primary m-3">Détails</a>
     </div>
   </div>
   `; 

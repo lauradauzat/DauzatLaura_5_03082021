@@ -10,7 +10,7 @@ var contactForm = document.getElementById("contact-form");
 
 function panierHandler() {
     const panierMenu = document.getElementById('panier-menu'); 
-    const panierFull = document.getElementById('panierFull');
+    
     if (localStorage.getItem('panier') === null) {
    
       console.log('panier = null');
@@ -63,8 +63,8 @@ function handleFormSubmit(event) {
 
     var data = {
         contact: {
-            firstName: nom, 
-            lastName: prenom, 
+            firstName: prenom, 
+            lastName: nom, 
             address: adresse, 
             city: ville, 
             email: email
@@ -98,12 +98,9 @@ function handleFormSubmit(event) {
         console.log(nomPourCommande);
         orderIdCommande = data.orderId;
         console.log(orderIdCommande);
+   
 
-        // Pour la suite réféchir a la meilleure manière d'imprimer la nom et l'order id dans la page confirmation, 
-        // en attendant j'ai preventDafault l'ouverture de la page confirmation 
-        //idee : faire passer les params dans l'url ? 
-
-        window.location.href = "/Front/html/confirmation.html?id="+orderIdCommande+"&name="+nomPourCommande;
+        //window.location.href = "/Front/html/confirmation.html?id="+orderIdCommande+"&name="+nomPourCommande;
 
     })
     
@@ -111,92 +108,6 @@ function handleFormSubmit(event) {
         console.error('Error:', error);
     });
 
-
-    // async function postData(url = '', data = {contact, products}) {
-    //     // Default options are marked with *
-    //     const response = await fetch(url, {
-    //       method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    //       mode: 'cors', // no-cors, *cors, same-origin
-    //       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    //       credentials: 'same-origin', // include, *same-origin, omit
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //         // 'Content-Type': 'application/x-www-form-urlencoded',
-    //       },
-    //       redirect: 'follow', // manual, *follow, error
-    //       referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    //       body: JSON.stringify(data) // body data type must match "Content-Type" header
-    //     });
-    //     return response.json(); // parses JSON response into native JavaScript objects
-    //   }
-      
-    //   postData('http://localhost:3000/api/teddies/order', { answer: 42 })
-    //     .then(data => {
-    //       console.log(data); // JSON data parsed by `data.json()` call
-    //     });
-    
-
-
 }
 
 
-
-// {
-//     "contact": {
-//         "firstName": "Jean",
-//         "lastName": "Michel", 
-//         "address": "12 rue des Oliviers",
-//         "city": "Toulouse", 
-//         "email": "jeanmichel@gmail.com"
-//     },
-//     "products": [
-//          "5be9c8541c9d440000665243"
-//     ]
-// }
-
-
-
-
-// function validateEmail()
-//     {
-//         var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//         return regexEmail.test(emailInput);
-//     }
-
-
-// //En cours --> Obj border vert quand donnée valide au keyup, border rouge, donnée invalide au focus out  
-
-// emailInput.onkeyup = validateEmail; 
-
-
-// if (validateEmail()) {
-//     emailInput.style.borderColor = "green"; 
-//     console.log('trueloop'); 
-// } 
-
-// if (!validateEmail()) {
-//     emailInput.style.borderColor = 'blue'; 
-//     console.log('falseloop'); 
-// }
-
-// console.log(validateEmail()); 
-
-
-
-
-
-//ENVOYER LE POST 
-// fetch('http://localhost:3000/api/teddies/order', {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify(data),
-// })
-// .then(response => response.json())
-// .then(data => {
-//   console.log('Success:', data);
-// })
-// .catch((error) => {
-//   console.error('Error:', error);
-// });
