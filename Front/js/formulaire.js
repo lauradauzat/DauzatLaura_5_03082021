@@ -1,12 +1,14 @@
-var nomInput = document.getElementById('inputNom'); 
-var prenomInput = document.getElementById('inputPrenom'); 
+const queryString = window.location.search; 
+const urlParams = new URLSearchParams(queryString);
 
-var emailInput = document.getElementById('inputEmail'); 
-
-var adresseInput = document.getElementById('inputAdresse'); 
-var villeInput = document.getElementById('inputVille'); 
-
-var contactForm = document.getElementById("contact-form"); 
+let nomInput = document.getElementById('inputNom'); 
+let prenomInput = document.getElementById('inputPrenom'); 
+let emailInput = document.getElementById('inputEmail'); 
+let adresseInput = document.getElementById('inputAdresse'); 
+let villeInput = document.getElementById('inputVille'); 
+let contactForm = document.getElementById("contact-form"); 
+let prixCommande = urlParams.get('price');
+let submitBtn = document.getElementById('submitBtn');
 
 function panierHandler() {
     const panierMenu = document.getElementById('panier-menu'); 
@@ -30,12 +32,11 @@ function panierHandler() {
       panierMenu.innerHTML += ` Panier <span id="panierFull" > ${countPanier} <i class="bi bi-circle-square"></i> </span> `;
       
     }
-  }
+}
 
 //handleSubmit 
 
 contactForm.addEventListener("submit", handleFormSubmit); 
-
 function handleFormSubmit(event) {
 
     event.preventDefault();
@@ -100,7 +101,7 @@ function handleFormSubmit(event) {
         console.log(orderIdCommande);
    
 
-        //window.location.href = "/Front/html/confirmation.html?id="+orderIdCommande+"&name="+nomPourCommande;
+        window.location.href = "/Front/html/confirmation.html?id="+orderIdCommande+"&name="+nomPourCommande+"&price="+prixCommande;
 
     })
     
@@ -110,4 +111,27 @@ function handleFormSubmit(event) {
 
 }
 
+
+
+// controlData();
+
+// function controlData() {
+//     emailInput.addEventListener('focusout', (event) => {
+//         ValidateEmail(event);
+//     });
+// }
+
+// function ValidateEmail(mail) 
+// {
+//  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput.value))
+//   {
+//     console.log('ok');
+//     return (true);
+//   }
+//     alert("Oups, il semble que votre adresse e-mail ne soit pas conforme ! ");
+//     return (false);
+// }
+
+
+// submitBtn.disabled = true;
 
