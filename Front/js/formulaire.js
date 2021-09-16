@@ -9,6 +9,7 @@ let villeInput = document.getElementById('inputVille');
 let contactForm = document.getElementById("contact-form"); 
 let prixCommande = urlParams.get('price');
 let submitBtn = document.getElementById('submitBtn');
+submitBtn.disabled = true; 
 
 function panierHandler() {
     const panierMenu = document.getElementById('panier-menu'); 
@@ -112,26 +113,45 @@ function handleFormSubmit(event) {
 }
 
 
+//form validation
 
-// controlData();
+document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', e => {
+        checkIfEmpty(e); 
 
-// function controlData() {
-//     emailInput.addEventListener('focusout', (event) => {
-//         ValidateEmail(event);
-//     });
-// }
-
-// function ValidateEmail(mail) 
-// {
-//  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput.value))
-//   {
-//     console.log('ok');
-//     return (true);
-//   }
-//     alert("Oups, il semble que votre adresse e-mail ne soit pas conforme ! ");
-//     return (false);
-// }
+    });
+})
 
 
-// submitBtn.disabled = true;
+emailInput.addEventListener('input', (event) => {
+     ValidateEmail(event);
+ });
+
+
+function ValidateEmail(mail) 
+{
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput.value))
+  {
+    emailInput.style.border = '1px solid #ced4da';
+    return (true);
+  } else if (emailInput.value === "") {
+    emailInput.style.border = '1px solid #ced4da';
+    return (false);
+  }
+    emailInput.style.border = 'red solid 1px';
+    return (false);
+}
+
+function checkIfEmpty() {
+    if (nomInput.value === "" || prenomInput.value === ""  || emailInput.value === "" ||  adresseInput.value === "" ||  villeInput.value === "") {
+        submitBtn.disabled = true; 
+
+    } else {
+        console.log("ok");
+        if (ValidateEmail()) {
+            submitBtn.disabled =false; 
+        }
+    }
+}
+
 
