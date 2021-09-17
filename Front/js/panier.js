@@ -3,12 +3,20 @@ const table = document.getElementById('teddieTable');
 const totalHtml = document.getElementById('total'); 
 const globalHtml = document.getElementById('global');
 const panierMenu = document.getElementById('panier-menu'); 
+
+//Récupère données du localStorage
+let panierStr = localStorage.getItem("panier");
+//transforme ces données en objet (from String) pour pouvoir les manipuler
+let panierObj = JSON.parse(panierStr);
+
 let display; 
 var price; 
 let total = 0; 
 
+loadContent();
+
 //function qui gère le visuel de l'icone panier du menu 
-function panierHandler() {
+function panierHandler(){
     
  
     if (localStorage.getItem('panier') === null) {
@@ -31,64 +39,33 @@ function panierHandler() {
       panierMenu.innerHTML = ` Panier <span id="panierFull" > ${countPanier} <i class="bi bi-circle-square"></i> </span> `;
       
     }
-  }
-
-
-  //function pour supprimer un article du panier via la croix 
-function deleteArticle(indexDelete) {
-
-    console.log('index Delete :', indexDelete);
-    console.log('panierObj : ', panierObj);
-    //deleting on object -> this works !!! 
-    panierObj.splice(indexDelete,1);
-    console.log('panier apres Splice :', panierObj);
-
-    //sending back modifying the array and sending it back
-    panierStr = JSON.stringify(panierObj);
-    localStorage.setItem("panier", panierStr);
-  
-    location.reload();
-    
-
 }
 
- 
-function basketIsEmpty() {
-    while (globalHtml.hasChildNodes()) {
-        globalHtml.removeChild(globalHtml.firstChild);
-    }
-    
-    globalHtml.innerHTML = '<div  class="col-12 d-flex align-items-center "><h1> Votre panier est vide </h1></div>';
-}    
-
-
-function deleteAll() {
-    localStorage.clear();
-    basketIsEmpty();
-    panierMenu.innerHTML = `Panier <span id="panierFull text text-danger" > <i class="bi bi-app"></i>`;
-  
-
+//récupère les dates par l'id pour obtenir le nom et le prix de chaque teddy
+function fetchArticle(id) {
+    url_article = 'http://localhost:3000/api/teddies/' + id; 
+    fetch(url_article, {
+        method: 'GET',
+        headers: {
+            "Accept" : "application/json",
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => response.json())
+    .catch(function(err) {
+        console.log('Fetch Error :-S', err);
+      })
 }
 
-// 1. Récupérer les articles dans le localStorage
-let panierStr = localStorage.getItem("panier");
-let panierObj = JSON.parse(panierStr);
-
-
+//permet de recharger le contenu de la page
 function loadContent() {
-
-    // si le panier est vide - afficher un teste "votre panier est vide"
-
+    // si le panier est vide - afficher "votre panier est vide"
     if (panierObj == null || panierObj.lenght == 0) {
-
-        basketIsEmpty();
-        
+        basketIsEmpty();    
     } else {
-
-        // 2. Récuperer les informations sur l'article
+    //Récupere les informations sur l'article
     panierObj.forEach((article, index) => {
-        fetchArticle(article.id, article.quantite);
-
+        fetchArticle(article.id);
         fetch("http://localhost:3000/api/teddies/"+article.id)
         .then(
             function(response) {
@@ -97,20 +74,11 @@ function loadContent() {
                 response.status);
                 return;
             }
-
-        
             response.json().then(function(data) {
                 display = data;
                 price = (display.price / 100); 
-        
-                
-        
-                //affiche le résultat 
-                //voir pour le mettre plutôt dans une fonction 
-
-                //si j'ai envie de compter les quantité correctement, c'est ici que ca se passe ! 
-                // creer un nouveau tableau a partir des données data 
-
+ 
+                //affiche les rows du tableau en HTML 
                 table.innerHTML += `
                     <tr>
                         <th scope="row"> ${display.name}</th>
@@ -121,7 +89,7 @@ function loadContent() {
                                  </td>
                             </tr> `;
 
-                    //remove 'deleteRow button when on formulaire page
+                    //si le fetch est fait sur la page formulaire, la commande est confirmé donc on bloque la possibilité de supprimer des articles
                     if(location.href.indexOf("formulaire") > -1) {
                         document.getElementById('removebtn').remove();
                     }
@@ -146,29 +114,42 @@ function loadContent() {
 
 }
 
-loadContent();
+//function pour supprimer un article du panier via la croix 
+function deleteArticle(indexDelete) {
 
-function goToFormulaire() {
-    url = 'formulaire.html?price="'+total+'"'; 
+    console.log('index Delete :', indexDelete);
+    console.log('panierObj : ', panierObj);
+    //deleting on object -> this works !!! 
+    panierObj.splice(indexDelete,1);
+    console.log('panier apres Splice :', panierObj);
 
-    window.location.href = url; 
+    //sending back modifying the array and sending it back
+    panierStr = JSON.stringify(panierObj);
+    localStorage.setItem("panier", panierStr);
+  
+    location.reload();
     
+
 }
 
-function fetchArticle(id) {
-    url_article = 'http://localhost:3000/api/teddies/' + id; 
-    console.log(url_article); 
-    fetch(url_article, {
-        method: 'GET',
-        headers: {
-            "Accept" : "application/json",
-            "Content-Type": "application/json"
-        }
-    })
-    .then(response => response.json())
-    // .then(data => displayArticle(data, quantite))
-    .catch(function(err) {
-        console.log('Fetch Error :-S', err);
-      })
+//supprime tout le panier
+function deleteAll() {
+    localStorage.clear();
+    basketIsEmpty();
+    panierMenu.innerHTML = `Panier <span id="panierFull text text-danger" > <i class="bi bi-app"></i>`;
+}
+
+//affiche le HTML du panier vide  
+function basketIsEmpty() {
+    while (globalHtml.hasChildNodes()) {
+        globalHtml.removeChild(globalHtml.firstChild);
+    }    
+    globalHtml.innerHTML = '<div  class="col-12 d-flex align-items-center "><h1> Votre panier est vide </h1></div>';
+}    
+
+//createURLpassingTotalPrice
+function goToFormulaire() {
+    url = 'formulaire.html?price="'+total+'"'; 
+    window.location.href = url; 
 }
 

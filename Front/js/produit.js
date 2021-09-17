@@ -1,4 +1,3 @@
-// let clickCount = 0; 
 
 function getId() {
     const param = window.location.search; 
@@ -12,30 +11,6 @@ function getFetch() {
     const fetchId = "http://localhost:3000/api/teddies/" + id ; 
     return fetchId;
    
-}
-
-function panierHandler() {
-  const panierMenu = document.getElementById('panier-menu'); 
-  if (localStorage.getItem('panier') === null) {
- 
-    console.log('panier = null');
-    panierMenu.innerHTML += ` <span id="panierFull text text-danger" > <i class="bi bi-app"></i>
-    </span> `;
-    
-
-  } else if  (localStorage.getItem('panier')) {
- 
-    console.log("panier is set");
-    
-    let panierStr = localStorage.getItem("panier");
-    let panierObj = JSON.parse(panierStr);
-    let countPanier = 0; 
-    panierObj.forEach(article => {
-    countPanier ++;
-    });
-    panierMenu.innerHTML += ` <span id="panierFull" > ${countPanier} <i class="bi bi-circle-square"></i> </span> `;
-    
-  }
 }
 
 const fetchId = getFetch();

@@ -8,29 +8,6 @@ const nameClient = urlParams.get('name');
 const prixCommande = urlParams.get('price').replace(/['"]+/g, '');
 let contentHtml = document.getElementById('confirmation-content');
 
-function panierHandler() {
-  const panierMenu = document.getElementById('panier-menu'); 
-  const panierFull = document.getElementById('panierFull');
-  if (localStorage.getItem('panier') === null) {
- 
-    console.log('panier = null');
-
-  } else if  (localStorage.getItem('panier')) {
- 
-    
-    console.log("panier is set");
-    
-    let panierStr = localStorage.getItem("panier");
-    let panierObj = JSON.parse(panierStr);
-    let countPanier = 0; 
-    panierObj.forEach(article => {
-    countPanier ++;
-    });
-    panierMenu.innerHTML = '';
-    panierMenu.innerHTML += ` Panier <span id="panierFull" > ${countPanier} <i class="bi bi-circle-square"></i> </span> `;
-    
-  }
-}
 
 if (idClient && nameClient) {
     contentHtml.innerHTML = `
@@ -39,7 +16,6 @@ if (idClient && nameClient) {
 
     <p> Votre commande d'un montant de ${prixCommande}€ à bien été réglée. <br>Elle va être transmise à notre partenaire La Postoco pour son transport </p>
     <p> Vous pouvez le suivre avec le numéro de suivi : ${idClient} </p>
-    
     
     `;
 
