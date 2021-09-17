@@ -10,18 +10,13 @@ fetch("http://localhost:3000/api/teddies/")
           response.status);
         return;
       }
-
       // Examine the text in the response
       response.json().then(function(data) {
-        
         for (const article of data)
           {
             console.log(article); 
-            // let teddieCount = 0;
             createDiv(article); 
           }
-
-      
 
       });
     }

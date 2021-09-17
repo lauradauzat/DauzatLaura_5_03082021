@@ -8,38 +8,11 @@ const panierMenu = document.getElementById('panier-menu');
 let panierStr = localStorage.getItem("panier");
 //transforme ces données en objet (from String) pour pouvoir les manipuler
 let panierObj = JSON.parse(panierStr);
-
 let display; 
-var price; 
+let price; 
 let total = 0; 
 
 loadContent();
-
-//function qui gère le visuel de l'icone panier du menu 
-function panierHandler(){
-    
- 
-    if (localStorage.getItem('panier') === null) {
-   
-      console.log('panier = null');
-      panierMenu.innerHTML = `Panier <span id="panierFull text text-danger" > <i class="bi bi-app"></i>`;
-  
-    } else if  (localStorage.getItem('panier')) {
-   
-      
-      console.log("panier is set");
-      
-      let panierStr = localStorage.getItem("panier");
-      let panierObj = JSON.parse(panierStr);
-      let countPanier = 0; 
-      panierObj.forEach(article => {
-      countPanier ++;
-      });
-      
-      panierMenu.innerHTML = ` Panier <span id="panierFull" > ${countPanier} <i class="bi bi-circle-square"></i> </span> `;
-      
-    }
-}
 
 //récupère les dates par l'id pour obtenir le nom et le prix de chaque teddy
 function fetchArticle(id) {
@@ -62,19 +35,22 @@ function loadContent() {
     // si le panier est vide - afficher "votre panier est vide"
     if (panierObj == null || panierObj.lenght == 0) {
         basketIsEmpty();    
-    } else {
+    } 
+    else 
+    {
     //Récupere les informations sur l'article
-    panierObj.forEach((article, index) => {
+        panierObj.forEach((article, index) => 
+        {
         fetchArticle(article.id);
         fetch("http://localhost:3000/api/teddies/"+article.id)
         .then(
             function(response) {
-            if (response.status !== 200) {
-                console.log('Looks like there was a problem. Status Code: ' +
-                response.status);
-                return;
-            }
-            response.json().then(function(data) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                    response.status);
+                    return;
+                }
+                response.json().then(function(data) {
                 display = data;
                 price = (display.price / 100); 
  
@@ -96,40 +72,27 @@ function loadContent() {
 
                 total += price; 
 
-                
                 totalHtml.innerHTML = `Total : ${total} €`
 
-            });
-            }
-        )
-        .catch(function(err) {
-            console.log('Fetch Error :-S', err);
+                });
+            
+        }).catch(function(err) {
+                console.log('Fetch Error :-S', err);
+        });
+    
         });
 
-    
-        
-    });
-
     }
-
 }
 
 //function pour supprimer un article du panier via la croix 
 function deleteArticle(indexDelete) {
-
-    console.log('index Delete :', indexDelete);
-    console.log('panierObj : ', panierObj);
-    //deleting on object -> this works !!! 
+     //delete
     panierObj.splice(indexDelete,1);
-    console.log('panier apres Splice :', panierObj);
-
-    //sending back modifying the array and sending it back
+    //turning new data to JSON to send it back 
     panierStr = JSON.stringify(panierObj);
     localStorage.setItem("panier", panierStr);
-  
     location.reload();
-    
-
 }
 
 //supprime tout le panier

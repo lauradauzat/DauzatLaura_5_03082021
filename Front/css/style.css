@@ -2,7 +2,7 @@
 /* $primary : #7b506f; */
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
 nav img {
-  height: 30px;
+  height: 40px;
 }
 nav a {
   text-decoration: none;
@@ -18,12 +18,17 @@ nav #panierFull {
 }
 
 .produit .card {
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.produit .card .card-img-top {
-  width: 500px;
+@media (min-width: 768px) {
+  .produit .card {
+    flex-direction: row;
+  }
+  .produit .card .card-img-top {
+    width: 500px;
+  }
 }
 .produit .card .card-body {
   display: flex;

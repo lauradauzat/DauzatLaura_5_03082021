@@ -13,7 +13,6 @@ let submitBtn = document.getElementById('submitBtn');
 //Par defaut le bouton d'envoi est bloqué
 submitBtn.disabled = true; 
 
-
 //form validation
 //vérifie a chaque modification si le formulaire est pret à l'envoie
 document.querySelectorAll('input').forEach(input => {
@@ -27,7 +26,6 @@ emailInput.addEventListener('input', (event) => {
      ValidateEmail(event);
  });
 
-
 function ValidateEmail(mail) 
 {
  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailInput.value))
@@ -39,6 +37,7 @@ function ValidateEmail(mail)
     return (false);
   }
     emailInput.style.border = 'red solid 1px';
+    submitBtn.disabled = true; 
     return (false);
 }
 
@@ -54,8 +53,6 @@ function checkIfEmpty() {
         }
     }
 }
-
-
 
 //on Submit click -> handleSubmit 
 contactForm.addEventListener("submit", handleFormSubmit); 
@@ -107,6 +104,7 @@ function handleFormSubmit(event) {
     
     .then(data => {
         console.log('Success:', data);
+
         //récupération de données renvoyé par l'API
         nomPourCommande = data.contact.firstName; 
         orderIdCommande = data.orderId;

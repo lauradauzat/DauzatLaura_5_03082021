@@ -1,13 +1,22 @@
 .produit .card{
+    
+    flex-direction: column;
 
-    flex-direction: row; 
+    @media (min-width: $breakpoint-tablet) {
+
+        flex-direction: row; 
+
+        .card-img-top {
+            width: 500px; 
+        }
+
+    }
+    
     justify-content: center;
     align-items: center;
     
 
-    .card-img-top {
-        width: 500px; 
-    }
+  
 
     .card-body {
         display: flex;
