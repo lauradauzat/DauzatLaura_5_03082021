@@ -17,6 +17,10 @@ nav #panierFull {
   color: #7d616ce0;
 }
 
+.collapse:not(.show) {
+  display: block !important;
+}
+
 .produit .card {
   flex-direction: column;
   justify-content: center;
